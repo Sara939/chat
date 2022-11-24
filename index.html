@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="chatWindow">
+        <div id="chatmassage"></div>
+        <input id="name" type="text" placeholder="name">
+        <input id="myinput" type="text" placeholder="massage">
+        <button id="btn">send</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script> 
+
+    <script>
+
+        const send = document.getElementById('btn');
+        const chatmassage = document.getElementById('chatmassage');
+        const socket= io();
+        
+        send.addEventListener('click', ()=>{
+            const text= document.getElementById('myinput').value
+            const name= document.getElementById('name').value
+            socket.emit('massage',{name,text})
+        });
+        socket.on('massage', ({name,text})=>{
+            chatmassage.innerHTML+= `<p>${name}: ${text}</p>`;
+        });
+
+
+    </script>
+    
+</body>
+</html>
