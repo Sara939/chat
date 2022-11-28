@@ -9,6 +9,7 @@ const server = http.createServer((req,res)=>{
 
 const io= require('socket.io')(server); //taking HTTP server and returning TCP server
 
+
 io.on('connection', (socket)=>{
     socket.on('massage', ({name,text})=>{
         console.log('emit');
